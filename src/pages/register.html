@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="register.js" defer></script>
+</head>
+<body>
+    <main>
+        <div class="form-container">
+            <h1>Sing Up</h1>
+            <p>Sing Up to continue</p>
+            <form id="register-form">
+                <label for="user" class="sr-only">User</label>
+                <input type="text" name="user" id="user" placeholder="User name">
+                <label for="phone" class="sr-only">Phone Number</label>
+                <input type="text" name="phone" id="phone" placeholder="Phone Number">
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" name="email" id="email" placeholder="Email">
+                <label for="password" class="sr-only">password</label>
+                <input type="password" name="password" id="password" placeholder="Password">
+                <button type="submit">SING UP</button>
+                <p class="error hide">The user name or password is incorrect</p>
+            </form>
+            <p>Already have an account? - <a href="/">LogIn</a></p>
+        </div>
+    </main>
+</body>
+</html>
