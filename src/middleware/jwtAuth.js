@@ -18,12 +18,8 @@ jwtExport.createToken = (user) => {
 }
 
 jwtExport.verifyToken = (req, res, next) => {
-
-
     try {
-
         const token = req.headers.authorization;
-
 
         if (!token) {
             return res.status(401).send({ messageDetail: Messages.REQUIRED_TOKEN, isSucess: false });

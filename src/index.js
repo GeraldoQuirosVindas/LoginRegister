@@ -29,9 +29,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 //Routes
-app.get("/", jwtExport.verifyToken, (req, res) => res.sendFile(_dirname + "/pages/login.html"));
-app.get("/register", jwtExport.verifyToken, (req, res) => res.sendFile(_dirname + "/pages/register.html"));
-app.get("/admin", jwtExport.verifyToken, (req, res) => res.sendFile(_dirname + "/pages/admin/admin.html"));
+app.get("/", (req, res) => res.sendFile(_dirname + "/pages/login.html"));
+app.get("/register", (req, res) => res.sendFile(_dirname + "/pages/register.html"));
+app.get("/admin", (req, res) => res.sendFile(_dirname + "/pages/admin/admin.html"));
 app.post("/api/register", authController.createUser);
 app.post("/api/login", authController.loginUser);
 
