@@ -1,6 +1,6 @@
 import userModel from "../models/userModel.js";
 import bcryptjs from "bcryptjs"
-import jwtExport from "../middleware/jwtAuth.js"
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { Messages } from "../utils/constans.js";
 
@@ -100,25 +100,14 @@ authController.loginUser = async (req, res) => {
             });
         }
 
-        /*         var responseUser = {
-                    email: emailDB,
-                    token: jwtExport.createToken(user)
-                }; */
-
-        const token = jwtExport.createToken(user);
+        const token = jwt.sign({ user: user.userName }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRATION });
         const cookieOption = {
             expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
             path: "/"
         }
         res.cookie("jwt", token, cookieOption);
         res.send({ status: "ok", message: "User logged", redirect: "/admin" })
-        /* 
-                return res.status(200).send({
-                    data: responseUser,
-                    messageDetail: Messages.MSG_SUCCESS,
-                    isSucess: true,
-                    redirect: "/admin",
-                }); */
+
     } catch (error) {
         return res.status(500).send({
             error: error.message,

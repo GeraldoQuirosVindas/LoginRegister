@@ -7,11 +7,10 @@ import authController from "./controllers/authentication.controller.js";
 //Fix _dirname
 import path from 'path';
 import { fileURLToPath } from "url";
-import jwtExport from "./middleware/jwtAuth.js";
 const _dirname = path.dirname(fileURLToPath(import.meta.url));
 
 //import { methods as authentication} from "./controllers/authentication.controller.js";
-//import { methods as authorization } from "./middlewares/authorization.js";
+import { methods as authorization } from "../src/middleware/authorization.js";
 
 dotenv.config();
 connectDb();
@@ -29,9 +28,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 //Routes
-app.get("/", (req, res) => res.sendFile(_dirname + "/pages/login.html"));
-app.get("/register", (req, res) => res.sendFile(_dirname + "/pages/register.html"));
-app.get("/admin", (req, res) => res.sendFile(_dirname + "/pages/admin/admin.html"));
+app.get("/", authorization.soloPublic, (req, res) => res.sendFile(_dirname + "/pages/login.html"));
+app.get("/register", authorization.soloPublic, (req, res) => res.sendFile(_dirname + "/pages/register.html"));
+app.get("/admin", authorization.soloAdmin, (req, res) => res.sendFile(_dirname + "/pages/admin/admin.html"));
 app.post("/api/register", authController.createUser);
 app.post("/api/login", authController.loginUser);
 
